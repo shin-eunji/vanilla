@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>밥플러스 식단표</h2>
+  <select id="babplus">
+    <option value="0">선택하세요.</option>
+  </select>
+  
+  <button type="button" id="addOpt">밥플러스 매장 추가</button>
+  <button type="button" id="selA">성수 에이팩센터점</button>
+  <button type="button" id="selV">SOL623타워점</button>
+  <button type="button" id="delLastOpt">마지막 매장 삭제</button>
+  <button type="button" id="delOpt">매장 전체 삭제</button>
+
+  <script>
+    
+  const babplusList = [
+    { numKey: '2', numVal: '메타모르포점' },
+    { numKey: '3', numVal: '서울숲 코오롱디지털타워3차점' },
+    { numKey: '5', numVal: '서울숲 M타워점' },
+    { numKey: '6', numVal: 'HausD 세종타워점' },
+    { numKey: 'F1', numVal: '성수역 SKV1 타워점' },
+    { numKey: 'F2', numVal: 'SOL623타워점' },
+    { numKey: 'F3', numVal: '서울숲 롯데IT캐슬점' },
+    { numKey: 'F4', numVal: '성수 에이팩센터점' },
+    { numKey: 'F5', numVal: '에이스하이엔드 성수타워점' },
+  ]
+
+  const target = document.getElementById('babplus')
+
+  const bab = document.getElementById('addOpt').addEventListener('click', function() {
+    if(target.children.length === 1) {
+      babplusList.forEach(function (list) {
+        const opt = document.createElement('option')
+        opt.setAttribute('value', list.numKey)
+        opt.innerText = list.numVal
+        target.appendChild(opt)
+      })
+    }
+  })
+
+  document.getElementById('selA').addEventListener('click', function() {
+    for (let i = 0; i < target.children.length; i++) {
+      if(target.children[i].value === 'F4') {
+        target.children[i].setAttribute('selected', '')
+      }
+    }
+  })
+
+  document.getElementById('selV').addEventListener('click', function() {
+    for (let i = 0; i < target.children.length; i++) {
+      if(target.children[i].value === 'F2') {
+        target.children[i].setAttribute('selected', '')
+      }
+    }
+  })
+
+  document.getElementById('delOpt').addEventListener('click', function() {
+    for (let i = 0; i < target.children.length;i++) {
+      if(target.children.length > 1 && target.firstChild) {
+        target.removeChild(target.lastChild)
+        i--
+      }
+    }
+  })
+  
+  document.getElementById('delLastOpt').addEventListener('click', function() {
+    if(target.children.length > 1 && target.firstChild) {
+        target.removeChild(target.lastChild)
+    }
+  })
+  
+  </script>
+</body>
+</html>
